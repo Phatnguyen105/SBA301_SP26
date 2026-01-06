@@ -1,6 +1,4 @@
-
 import './App.css'
-import 'bootstrap/dist/js/bootstrap.bundle.min.js' 
 import Header from './Components/Header'
 import Footer from './Components/Footer'
 

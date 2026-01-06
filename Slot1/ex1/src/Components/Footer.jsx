@@ -14,7 +14,7 @@ function Footer() {
           </div>
 
           <div className="col-md-4 text-center text-md-start mb-3 mb-md-0">
-            <h5 className="mb-1">Tác giả: &copy; Phatnguyen</h5>
+            <h5 className="mb-1">Tác giả: &copy; PhatNguyen</h5>
             <p className="mb-0">Backend Developer</p>
           </div>
 
