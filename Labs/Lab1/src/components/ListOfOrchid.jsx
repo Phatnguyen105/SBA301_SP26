@@ -1,25 +1,22 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Orchid from "./Orchid";
-import listOrchids from "../listOrchids";
-function ListOrchid() {
+
+function ListOfOrchid({ orchids }) {
   return (
-    <Container className="py-5">
-      <Row>
-        {listOrchids.map((orchid) => (
-          <Col md={6} lg={3} className="mb-4" key={orchid.id}>
-            <Orchid
-              orchidName={orchid.orchidName}
-              description={orchid.description}
-              category={orchid.category}
-              isSpecial={orchid.isSpecial}
-              image={orchid.image}
-            />
-          </Col>
-        ))}
-      </Row>
-    </Container>
+    <main className="flex-fill py-4">
+      <Container>
+        <h1 className="text-center mb-4">WELCOME TO MY WEBSITE</h1>
+        <Row>
+          {orchids.map((orchid) => (
+            <Col md={6} lg={3} className="mb-4" key={orchid.id}>
+              <Orchid {...orchid} />
+            </Col>
+          ))}
+        </Row>
+      </Container>
+    </main>
   );
 }
 
-export default ListOrchid;
+export default ListOfOrchid;

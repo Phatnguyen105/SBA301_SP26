@@ -3,19 +3,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import ListOfOrchid from "./components/ListOfOrchid";
+import OrchidsData from "./data/listOrchids";
 
 function App() {
   return (
     <div className="d-flex flex-column min-vh-100">
       <Header />
-
-      <main className="flex-fill py-4">
-        <div className="container">
-          <h1 className="text-center mb-4">WELCOME TO MY WEBSITE</h1>
-          <ListOfOrchid />
-        </div>
-      </main>
-
+      <ListOfOrchid orchids={OrchidsData} />
       <Footer avatar="/images/anh.jpg" name="Phat" email="Phat@fpt.edu.vn" />
     </div>
   );
