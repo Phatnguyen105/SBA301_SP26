@@ -1,4 +1,4 @@
-import api from "./api";
+import api from "../styles/api";
 
 const TagService = {
   getAllTags: async () => {

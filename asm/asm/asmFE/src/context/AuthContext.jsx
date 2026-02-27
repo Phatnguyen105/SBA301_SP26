@@ -1,18 +1,23 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
-const AuthContext = createContext(null);
+const AuthContext = createContext(undefined);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check if user is logged in (from localStorage)
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
+    try {
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
+    } catch (e) {
+      console.error("Invalid user data in localStorage", e);
+      localStorage.removeItem("user");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   }, []);
 
   const login = (userData) => {
@@ -25,22 +30,28 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("user");
   };
 
-  const isAdmin = () => {
-    return user && user.accountRole === 1;
-  };
-
-  const isStaff = () => {
-    return user && user.accountRole === 2;
-  };
+  const isAdmin = user?.accountRole === 1;
+  const isStaff = user?.accountRole === 2;
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, isAdmin, isStaff, loading }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider
+      value={{
+        user,
+        loading,
+        login,
+        logout,
+        isAdmin,
+        isStaff,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
   );
 };
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
-  if (!context) {
+  if (context === undefined) {
     throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
